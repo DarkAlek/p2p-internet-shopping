@@ -1,0 +1,99 @@
+﻿@using web_server.Helpers; 
+
+@model IEnumerable<web_server.Model.Service>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<section id="user-area" class="main-section">
+    <div class="container">
+        
+        @using (Html.BeginForm("Index", "Services", FormMethod.Get))
+        {
+            <div class="form-group" style="max-width:350px;float:left;">
+                <label for="region">Region</label>
+                @Html.TextBox("region", null, new { placeholder = "Region np. Warszawa", @class = "form-control", name = "region" })
+            </div>
+            <div class="form-group" style="max-width:130px;float:left;">
+                <label for="region">Cena</label><br/>
+                @Html.TextBox("price_low", null, new { placeholder="Od", @class="form-control", name="region", style="width:60px;display:inline-block" })
+                @Html.TextBox("price_high", null, new { placeholder="Do", @class="form-control", name="region", style="width:60px;display:inline-block" })
+            </div>
+            <div class="form-group" style="max-width:160px;float:left;">
+                <label for="sort">Sortuj</label><br />
+                <select name="sort" class="form-control">
+                    <option value="price_asc">Najtańsze</option>
+                    <option value="price_desc">Najdroższe</option>
+                    <option value="rate_asc">Najlepsze opinie</option>
+                    <option value="rate_desc">Najgorsze opinie</option>
+                </select>
+            </div>
+            <div id="submit" style="float:left;margin-top:25px;">
+                <input class="btn btn-default btn-send" id="contact-submit" type="submit" value="Szukaj" />
+            </div>
+            <div style="clear:both"></div>
+        }
+        <br/>
+        <br/>
+        <h2>Usługi w Twojej okolicy</h2>
+        <br />
+        <div class="services-container">
+            @foreach (var item in Model)
+            {
+                <a class="service-container" href="@Url.Action("Service", "Services", new { id = item.Id }, null)">
+                    <div class="service-left">
+                        <h3 style="float:left">@Html.DisplayFor(modelItem => item.Title)</h3>
+                        <div style="clear:both"></div>
+                        <div class="service-provider">
+                            <b>@Html.DisplayFor(modelItem => item.Provider.FirstName)</b><br /><br />
+                            @if (ProviderRateHelper.GetCount(item.Provider) > 0)
+                            {
+                                <span class="glyphicon glyphicon-star" aria-hidden="true" style="color:#ffe100"></span>
+                                <span>@ProviderRateHelper.GetRate(item.Provider)/ 5 (@ProviderRateHelper.GetCount(item.Provider) ocen)</span>
+                            }
+                            else
+                            {
+                                <span>Brak ocen</span>
+                            }
+                        </div>
+                        <div class="service-desc" style="float:left">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </div>
+                    </div>
+
+                    <div class="service-right">
+                        <div class="service-price">
+                            @Html.DisplayFor(modelItem => item.Price) zł
+                        </div>
+                        <br />
+                        <div class="service-loc">
+                            @Html.DisplayFor(modelItem => item.Region.Name)
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+        <nav aria-label="..." class="services-paginator">
+            <ul class="pagination">
+                @if (ViewBag.Page > 1)
+                {
+                    <li><a href="@this.Url.Action("Index", "Services", new { region=ViewBag.Region, page=ViewBag.Page-1 }, null)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                }
+                @for (var i = Math.Max(ViewBag.Page - 2, 1); i < ViewBag.Page; ++i)
+                {
+                    <li><a href="@this.Url.Action("Index", "Services", new { region=ViewBag.Region, page=i }, null)">@i</a></li>
+                }
+                <li class="active"><a href="#">@ViewBag.Page<span class="sr-only">(current)</span></a></li>
+                @for (var i = ViewBag.Page + 1; i <= ViewBag.NumOfPages && i - ViewBag.Page < 3; ++i)
+                {
+                    <li><a href="@this.Url.Action("Index", "Services", new { region=ViewBag.Region, page=i }, null)">@i</a></li>
+                }
+                @if (ViewBag.Page < ViewBag.NumOfPages)
+                {
+                    <li><a href="@this.Url.Action("Index", "Services", new { region=ViewBag.Region, page=ViewBag.Page+1 }, null)" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</section>

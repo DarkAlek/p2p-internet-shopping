@@ -1,0 +1,924 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RateSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ProviderId" Type="int" Nullable="false" />
+          <Property Name="Mark" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegionSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceChoosedSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ProviderId" Type="int" Nullable="false" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+          <Property Name="Accepted" Type="bit" Nullable="false" />
+          <Property Name="CustomerNote" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FinishedByProvider" Type="bit" Nullable="false" />
+          <Property Name="FinishedByCustomer" Type="bit" Nullable="false" />
+          <Property Name="Rate_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ServiceSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProviderId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SecondName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Activated" Type="bit" Nullable="false" />
+          <Property Name="NetUserId" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSet_Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSet_Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSet_Provider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Admin_inherits_User">
+          <End Role="UserSet" Type="Self.UserSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserSet_Admin" Type="Self.UserSet_Admin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSet_Admin">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_inherits_User">
+          <End Role="UserSet" Type="Self.UserSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserSet_Customer" Type="Self.UserSet_Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSet_Customer">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerRate">
+          <End Role="UserSet_Customer" Type="Self.UserSet_Customer" Multiplicity="1" />
+          <End Role="RateSet" Type="Self.RateSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserSet_Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RateSet">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerServiceChoosed">
+          <End Role="UserSet_Customer" Type="Self.UserSet_Customer" Multiplicity="1" />
+          <End Role="ServiceChoosedSet" Type="Self.ServiceChoosedSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserSet_Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceChoosedSet">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider_inherits_User">
+          <End Role="UserSet" Type="Self.UserSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserSet_Provider" Type="Self.UserSet_Provider" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSet_Provider">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProviderRate">
+          <End Role="UserSet_Provider" Type="Self.UserSet_Provider" Multiplicity="1" />
+          <End Role="RateSet" Type="Self.RateSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserSet_Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RateSet">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProviderService">
+          <End Role="UserSet_Provider" Type="Self.UserSet_Provider" Multiplicity="1" />
+          <End Role="ServiceSet" Type="Self.ServiceSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserSet_Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceSet">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProviderServiceChoosed">
+          <End Role="UserSet_Provider" Type="Self.UserSet_Provider" Multiplicity="1" />
+          <End Role="ServiceChoosedSet" Type="Self.ServiceChoosedSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserSet_Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceChoosedSet">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RateServiceChoosed">
+          <End Role="RateSet" Type="Self.RateSet" Multiplicity="0..1" />
+          <End Role="ServiceChoosedSet" Type="Self.ServiceChoosedSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RateSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceChoosedSet">
+              <PropertyRef Name="Rate_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRegion">
+          <End Role="RegionSet" Type="Self.RegionSet" Multiplicity="1" />
+          <End Role="ServiceSet" Type="Self.ServiceSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceSet">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceServiceChoosed">
+          <End Role="ServiceSet" Type="Self.ServiceSet" Multiplicity="1" />
+          <End Role="ServiceChoosedSet" Type="Self.ServiceChoosedSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceChoosedSet">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RateSet" EntityType="Self.RateSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegionSet" EntityType="Self.RegionSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceChoosedSet" EntityType="Self.ServiceChoosedSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceSet" EntityType="Self.ServiceSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSet" EntityType="Self.UserSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSet_Admin" EntityType="Self.UserSet_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSet_Customer" EntityType="Self.UserSet_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSet_Provider" EntityType="Self.UserSet_Provider" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Admin_inherits_User" Association="Self.FK_Admin_inherits_User">
+            <End Role="UserSet" EntitySet="UserSet" />
+            <End Role="UserSet_Admin" EntitySet="UserSet_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_inherits_User" Association="Self.FK_Customer_inherits_User">
+            <End Role="UserSet" EntitySet="UserSet" />
+            <End Role="UserSet_Customer" EntitySet="UserSet_Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerRate" Association="Self.FK_CustomerRate">
+            <End Role="UserSet_Customer" EntitySet="UserSet_Customer" />
+            <End Role="RateSet" EntitySet="RateSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerServiceChoosed" Association="Self.FK_CustomerServiceChoosed">
+            <End Role="UserSet_Customer" EntitySet="UserSet_Customer" />
+            <End Role="ServiceChoosedSet" EntitySet="ServiceChoosedSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_inherits_User" Association="Self.FK_Provider_inherits_User">
+            <End Role="UserSet" EntitySet="UserSet" />
+            <End Role="UserSet_Provider" EntitySet="UserSet_Provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProviderRate" Association="Self.FK_ProviderRate">
+            <End Role="UserSet_Provider" EntitySet="UserSet_Provider" />
+            <End Role="RateSet" EntitySet="RateSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProviderService" Association="Self.FK_ProviderService">
+            <End Role="UserSet_Provider" EntitySet="UserSet_Provider" />
+            <End Role="ServiceSet" EntitySet="ServiceSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProviderServiceChoosed" Association="Self.FK_ProviderServiceChoosed">
+            <End Role="UserSet_Provider" EntitySet="UserSet_Provider" />
+            <End Role="ServiceChoosedSet" EntitySet="ServiceChoosedSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RateServiceChoosed" Association="Self.FK_RateServiceChoosed">
+            <End Role="RateSet" EntitySet="RateSet" />
+            <End Role="ServiceChoosedSet" EntitySet="ServiceChoosedSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRegion" Association="Self.FK_ServiceRegion">
+            <End Role="RegionSet" EntitySet="RegionSet" />
+            <End Role="ServiceSet" EntitySet="ServiceSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceServiceChoosed" Association="Self.FK_ServiceServiceChoosed">
+            <End Role="ServiceSet" EntitySet="ServiceSet" />
+            <End Role="ServiceChoosedSet" EntitySet="ServiceChoosedSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DatabaseModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserSet" EntityType="DatabaseModel.User" />
+          <EntitySet Name="ServiceSet" EntityType="DatabaseModel.Service" />
+          <AssociationSet Name="ProviderService" Association="DatabaseModel.ProviderService">
+            <End Role="Provider" EntitySet="UserSet" />
+            <End Role="Service" EntitySet="ServiceSet" />
+          </AssociationSet>
+          <EntitySet Name="RegionSet" EntityType="DatabaseModel.Region" />
+          <AssociationSet Name="ServiceRegion" Association="DatabaseModel.ServiceRegion">
+            <End Role="Region" EntitySet="RegionSet" />
+            <End Role="Service" EntitySet="ServiceSet" />
+          </AssociationSet>
+          <EntitySet Name="ServiceChoosedSet" EntityType="DatabaseModel.ServiceChoosed" />
+          <AssociationSet Name="CustomerServiceChoosed" Association="DatabaseModel.CustomerServiceChoosed">
+            <End Role="Customer" EntitySet="UserSet" />
+            <End Role="ServiceChoosed" EntitySet="ServiceChoosedSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProviderServiceChoosed" Association="DatabaseModel.ProviderServiceChoosed">
+            <End Role="Provider" EntitySet="UserSet" />
+            <End Role="ServiceChoosed" EntitySet="ServiceChoosedSet" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceServiceChoosed" Association="DatabaseModel.ServiceServiceChoosed">
+            <End Role="Service" EntitySet="ServiceSet" />
+            <End Role="ServiceChoosed" EntitySet="ServiceChoosedSet" />
+          </AssociationSet>
+          <EntitySet Name="RateSet" EntityType="DatabaseModel.Rate" />
+          <AssociationSet Name="CustomerRate" Association="DatabaseModel.CustomerRate">
+            <End Role="Customer" EntitySet="UserSet" />
+            <End Role="Rate" EntitySet="RateSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProviderRate" Association="DatabaseModel.ProviderRate">
+            <End Role="Provider" EntitySet="UserSet" />
+            <End Role="Rate" EntitySet="RateSet" />
+          </AssociationSet>
+          <AssociationSet Name="RateServiceChoosed" Association="DatabaseModel.RateServiceChoosed">
+            <End Role="Rate" EntitySet="RateSet" />
+            <End Role="ServiceChoosed" EntitySet="ServiceChoosedSet" />
+          </AssociationSet>
+          <EntitySet Name="C__MigrationHistory" EntityType="DatabaseModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="DatabaseModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="DatabaseModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="DatabaseModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="DatabaseModel.AspNetUsers" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="DatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="DatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="DatabaseModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SecondName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Activated" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <Property Name="NetUserId" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Customer" BaseType="DatabaseModel.User" >
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ServiceChoosed" Relationship="DatabaseModel.CustomerServiceChoosed" FromRole="Customer" ToRole="ServiceChoosed" />
+          <NavigationProperty Name="Rate" Relationship="DatabaseModel.CustomerRate" FromRole="Customer" ToRole="Rate" />
+        </EntityType>
+        <EntityType Name="Provider" BaseType="DatabaseModel.User" >
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Service" Relationship="DatabaseModel.ProviderService" FromRole="Provider" ToRole="Service" />
+          <NavigationProperty Name="ServiceChoosed" Relationship="DatabaseModel.ProviderServiceChoosed" FromRole="Provider" ToRole="ServiceChoosed" />
+          <NavigationProperty Name="Rate" Relationship="DatabaseModel.ProviderRate" FromRole="Provider" ToRole="Rate" />
+        </EntityType>
+        <EntityType Name="Admin" BaseType="DatabaseModel.User" />
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Description" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Provider" Relationship="DatabaseModel.ProviderService" FromRole="Service" ToRole="Provider" />
+          <Property Name="ProviderId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Region" Relationship="DatabaseModel.ServiceRegion" FromRole="Service" ToRole="Region" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceChoosed" Relationship="DatabaseModel.ServiceServiceChoosed" FromRole="Service" ToRole="ServiceChoosed" />
+        </EntityType>
+        <Association Name="ProviderService">
+          <End Type="DatabaseModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="DatabaseModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Service" Relationship="DatabaseModel.ServiceRegion" FromRole="Region" ToRole="Service" />
+        </EntityType>
+        <Association Name="ServiceRegion">
+          <End Type="DatabaseModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="DatabaseModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ServiceChoosed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customer" Relationship="DatabaseModel.CustomerServiceChoosed" FromRole="ServiceChoosed" ToRole="Customer" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provider" Relationship="DatabaseModel.ProviderServiceChoosed" FromRole="ServiceChoosed" ToRole="Provider" />
+          <Property Name="ProviderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="DatabaseModel.ServiceServiceChoosed" FromRole="ServiceChoosed" ToRole="Service" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <Property Name="Accepted" Type="Boolean" Nullable="false" />
+          <Property Name="CustomerNote" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FinishedByProvider" Type="Boolean" Nullable="false" />
+          <Property Name="FinishedByCustomer" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Rate" Relationship="DatabaseModel.RateServiceChoosed" FromRole="ServiceChoosed" ToRole="Rate" />
+        </EntityType>
+        <Association Name="CustomerServiceChoosed">
+          <End Type="DatabaseModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="DatabaseModel.ServiceChoosed" Role="ServiceChoosed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceChoosed">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProviderServiceChoosed">
+          <End Type="DatabaseModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="DatabaseModel.ServiceChoosed" Role="ServiceChoosed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceChoosed">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceServiceChoosed">
+          <End Type="DatabaseModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="DatabaseModel.ServiceChoosed" Role="ServiceChoosed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceChoosed">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customer" Relationship="DatabaseModel.CustomerRate" FromRole="Rate" ToRole="Customer" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provider" Relationship="DatabaseModel.ProviderRate" FromRole="Rate" ToRole="Provider" />
+          <Property Name="ProviderId" Type="Int32" Nullable="false" />
+          <Property Name="Mark" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceChoosed" Relationship="DatabaseModel.RateServiceChoosed" FromRole="Rate" ToRole="ServiceChoosed" />
+        </EntityType>
+        <Association Name="CustomerRate">
+          <End Type="DatabaseModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="DatabaseModel.Rate" Role="Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProviderRate">
+          <End Type="DatabaseModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="DatabaseModel.Rate" Role="Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RateServiceChoosed">
+          <End Type="DatabaseModel.Rate" Role="Rate" Multiplicity="0..1" />
+          <End Type="DatabaseModel.ServiceChoosed" Role="ServiceChoosed" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DatabaseModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="DatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="DatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="DatabaseModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="DatabaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DatabaseModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="DatabaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DatabaseModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="DatabaseModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="DatabaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseModelContainer">
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+          <ScalarProperty Name="Activated" ColumnName="Activated" />
+          <ScalarProperty Name="NetUserId" ColumnName="NetUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Provider)">
+        <MappingFragment StoreEntitySet="UserSet_Provider">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Customer)">
+        <MappingFragment StoreEntitySet="UserSet_Customer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Admin)">
+        <MappingFragment StoreEntitySet="UserSet_Admin">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Service)">
+        <MappingFragment StoreEntitySet="ServiceSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Region)">
+        <MappingFragment StoreEntitySet="RegionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceChoosedSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.ServiceChoosed)">
+        <MappingFragment StoreEntitySet="ServiceChoosedSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+          <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+          <ScalarProperty Name="CustomerNote" ColumnName="CustomerNote" />
+          <ScalarProperty Name="FinishedByProvider" ColumnName="FinishedByProvider" />
+          <ScalarProperty Name="FinishedByCustomer" ColumnName="FinishedByCustomer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RateSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.Rate)">
+        <MappingFragment StoreEntitySet="RateSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="Mark" ColumnName="Mark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RateServiceChoosed" TypeName="DatabaseModel.RateServiceChoosed" StoreEntitySet="ServiceChoosedSet">
+      <EndProperty Name="Rate">
+        <ScalarProperty Name="Id" ColumnName="Rate_Id" />
+      </EndProperty>
+      <EndProperty Name="ServiceChoosed">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Rate_Id" IsNull="false" />
+    </AssociationSetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="DatabaseModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DatabaseModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="DatabaseModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="DatabaseModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DatabaseModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DatabaseModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="268fbbfe69694dfaaa773995b23add20" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Customer" Width="1.5" PointX="5.625" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Provider" Width="1.5" PointX="9.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Admin" Width="1.5" PointX="13.875" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Service" Width="1.5" PointX="11.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Region" Width="1.5" PointX="9" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.ServiceChoosed" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Rate" Width="1.5" PointX="11.25" PointY="6.375" IsExpanded="true" />
+        <InheritanceConnector EntityType="DatabaseModel.Customer" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="DatabaseModel.Provider" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="DatabaseModel.Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.ProviderService" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.ServiceRegion" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.CustomerServiceChoosed" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.ProviderServiceChoosed" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.ServiceServiceChoosed" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.CustomerRate" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.ProviderRate" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.RateServiceChoosed" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DatabaseModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DatabaseModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="12.5" />
+        <EntityTypeShape EntityType="DatabaseModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="11" />
+        <EntityTypeShape EntityType="DatabaseModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="13.75" />
+        <EntityTypeShape EntityType="DatabaseModel.AspNetUsers" Width="1.5" PointX="3" PointY="11.375" />
+        <AssociationConnector Association="DatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DatabaseModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

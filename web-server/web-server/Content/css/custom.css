@@ -1,0 +1,166 @@
+﻿.main-section {
+    padding-top:110px;
+    min-height:700px;
+}
+
+.service-container {
+    display:block;
+    cursor:pointer;
+    float:left;
+    width:100%;
+    border-bottom:1px solid #ddd;
+    padding: 0 20px 10px 10px;
+    text-decoration:none;
+    color:#0d0d0d;
+}
+
+.service-container:hover {
+    color:#0d0d0d;
+    text-decoration:none;
+}
+
+.service-container:hover {
+    background-color:#fcfcfc;
+}
+
+.service-provider {
+    float:left;
+    width:200px;
+}
+
+.service-left {
+    float:left;
+}
+
+.service-right {
+    margin: 10px 15px 0 0;
+    float:right;
+}
+
+.service-price {
+    font-size:25px;
+    font-weight:bold;
+}
+
+.services-paginator {
+    margin-top:30px;
+    float:right;
+}
+
+.clientservices-paginator {
+    margin-top:50px;
+    margin-left:1000px;
+    float:right;
+}
+
+#footer {
+    margin-top:50px;
+}
+
+.form-group {
+    margin-right:10px;
+}
+
+.service-column {
+    padding:0;
+}
+
+.service-column:first-child {
+    padding-right: 10px;
+}
+
+.service-column-inner {
+    border:1px solid #ddd;
+    border-radius:3px;
+}
+
+.service-column:first-child .service-column-inner {
+    padding:10px 10px 30px 20px;
+    min-height:250px;
+}
+
+.service-column-right-header {
+    text-align:right;
+    border-bottom:1px solid #ddd;
+    padding:0 15px 10px 0;
+    margin-top:10px;
+    margin-bottom:0;
+}
+
+.service-column-right-header span {
+    font-weight: normal !important;
+    color: #bbb;
+    font-size: 16px;
+    position: relative;
+    top: -2px;
+    left: -30px;
+}
+
+.service-column-right-header:last-child {
+    border-bottom:none;
+}
+
+span.service-login-info {
+    color:#000;
+    position:static;
+    font-size:12px;
+}
+
+span.service-login-info .a {
+    color:#02bdd5;
+}
+
+.order-summary {
+    display:none;
+}
+
+#star-1:checked ~ section [for='star-1'] svg, #star-2:checked ~ section [for='star-1'] svg, #star-2:checked ~ section [for='star-2'] svg, #star-3:checked ~ section [for='star-1'] svg, #star-3:checked ~ section [for='star-2'] svg, #star-3:checked ~ section [for='star-3'] svg, #star-4:checked ~ section [for='star-1'] svg, #star-4:checked ~ section [for='star-2'] svg, #star-4:checked ~ section [for='star-3'] svg, #star-4:checked ~ section [for='star-4'] svg, #star-5:checked ~ section [for='star-1'] svg, #star-5:checked ~ section [for='star-2'] svg, #star-5:checked ~ section [for='star-3'] svg, #star-5:checked ~ section [for='star-4'] svg, #star-5:checked ~ section [for='star-5'] svg {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+#star-1:checked ~ section [for='star-1'] svg path, #star-2:checked ~ section [for='star-1'] svg path, #star-2:checked ~ section [for='star-2'] svg path, #star-3:checked ~ section [for='star-1'] svg path, #star-3:checked ~ section [for='star-2'] svg path, #star-3:checked ~ section [for='star-3'] svg path, #star-4:checked ~ section [for='star-1'] svg path, #star-4:checked ~ section [for='star-2'] svg path, #star-4:checked ~ section [for='star-3'] svg path, #star-4:checked ~ section [for='star-4'] svg path, #star-5:checked ~ section [for='star-1'] svg path, #star-5:checked ~ section [for='star-2'] svg path, #star-5:checked ~ section [for='star-3'] svg path, #star-5:checked ~ section [for='star-4'] svg path, #star-5:checked ~ section [for='star-5'] svg path {
+  fill: #FFBB00;
+  stroke: #cc9600;
+}
+
+section.rate {
+    width: 300px;
+    margin: 0 0px 5px 5px;
+}
+
+section.rate label {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+  cursor: pointer;
+  margin-right: -10px;
+}
+
+section.rate label svg {
+  width: 100%;
+  height: auto;
+  fill: white;
+  stroke: #CCC;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  -webkit-transition: -webkit-transform 200ms ease-in-out;
+  transition: -webkit-transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out;
+}
+
+section.rate label svg path {
+  -webkit-transition: fill 200ms ease-in-out, stroke 100ms ease-in-out;
+  transition: fill 200ms ease-in-out, stroke 100ms ease-in-out;
+}
+
+section.rate label[for="star-null"] {
+  display: block;
+  margin: 0 auto;
+  color: #999;
+}
+
+.hidden_stars {
+  display: none;
+}

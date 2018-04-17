@@ -1,0 +1,85 @@
+﻿@using web_server.Helpers; 
+
+@model IEnumerable<web_server.Model.ServiceChoosed>
+
+@{
+    ViewBag.Title = "PreviousClientView";
+}
+
+<section id="user-area" class="main-section">
+    <div class="container">
+        <h2>Moje Usługi</h2>
+        <br />
+        <ul class="nav nav-tabs" role="tablist">
+            <li><a href="@Url.Action("Index", "ClientServices")">Aktywne usługi</a></li>
+            <li><a href="@Url.Action("ToRateServices", "ClientServices")">Usługi do oceny</a></li>
+            <li  class="active"><a href="@Url.Action("PreviousServices", "ClientServices")">Poprzednie usługi</a></li>
+        </ul>
+        <br />
+        <div id="services-container">
+            @{ int i = 0; }
+            @foreach (var item in Model)
+            {
+                <a class="service-container" data-parent="#services-container" data-target="#@i" data-toggle="collapse">
+                    <div class="service-left">
+                        <h3 style="float:left">@Html.DisplayFor(modelItem => item.Service.Title)</h3>
+                        <div style="clear:both"></div>
+                        <div class="service-provider">
+                            <b>@Html.DisplayFor(modelItem => item.Provider.FirstName) @Html.DisplayFor(modelItem => item.Provider.SecondName)</b>
+                            @if (ProviderRateHelper.GetCount(item.Provider) > 0)
+                            {   
+                                <span class="glyphicon glyphicon-star" aria-hidden="true" style="color:#ffe100"></span>
+                                <span>@ProviderRateHelper.GetRate(item.Provider)/5 (@ProviderRateHelper.GetCount(item.Provider) ocen)</span>
+                            }
+                            else
+                            {
+                                <span>Brak ocen</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="service-right">
+                        <div class="service-price">
+                            @Html.DisplayFor(modelItem => item.Service.Price) zł
+                        </div>
+                        <div class="service-mark">
+                            Moja Ocena: <span class="glyphicon glyphicon-star" aria-hidden="true" style="color:#ffe100"></span>  @Html.DisplayFor(modelItem => item.Rate.Mark)
+                        </div>
+                    </div>
+                </a>
+                <div id="@i" class="collapse">
+                   <p><b>Zakupy:</b></p>
+                   <p>@(item.CustomerNote)</p>
+                </div>
+                i++;
+            }
+        </div>
+        <nav aria-label="..." class="clientservices-paginator">
+            <ul class="pagination">
+                @if (ViewBag.Page > 1)
+            {
+                    <li><a href="@this.Url.Action("PreviousServices", "ClientServices", new { page=ViewBag.Page-1 }, null)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                }
+                @for (var it = Math.Max(ViewBag.Page - 2, 1); it < ViewBag.Page; ++it)
+            {
+                    <li><a href="@this.Url.Action("PreviousServices", "ClientServices", new { page=i }, null)">@it</a></li>
+                }
+                <li class="active"><a href="#">@ViewBag.Page<span class="sr-only">(current)</span></a></li>
+                @for (var it = ViewBag.Page + 1; it <= ViewBag.NumOfPages && it - ViewBag.Page < 3; ++i)
+            {
+                    <li><a href="@this.Url.Action("PreviousServices", "ClientServices", new { page=i }, null)">@it</a></li>
+                }
+                @if (ViewBag.Page < ViewBag.NumOfPages)
+            {
+                    <li><a href="@this.Url.Action("PreviousServices", "ClientServices", new { page=ViewBag.Page+1 }, null)" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<script>
+        var $myGroup = $('#services-container');
+        $myGroup.on('show.bs.collapse', '.collapse', function () {
+            $myGroup.find('.collapse.in').collapse('hide');
+        });
+</script>

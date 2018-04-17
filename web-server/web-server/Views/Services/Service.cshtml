@@ -1,0 +1,63 @@
+﻿@using web_server.Helpers;
+
+@model web_server.Model.Service
+
+@{
+    ViewBag.Title = "Service";
+}
+
+<section id="service-area" class="main-section">
+    <div class="container">
+        <div class="row">
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li onclick="window.history.back();" class="previous"><a href="#"><span aria-hidden="true">←</span> Powrót do wyników wyszukiwania</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-8 service-column">
+                <div class="service-column-inner">
+                    <h3>@Model.Title</h3>
+                    <p style="margin-bottom:30px;">@Model.Description</p>
+                   
+                    Usługodawca: <b>@Model.Provider.FirstName @Model.Provider.SecondName</b><br/>
+                    Średnia ocen: 
+                    @if (ProviderRateHelper.GetCount(Model.Provider) > 0)
+                    {
+                        <b>@ProviderRateHelper.GetRate(Model.Provider) / 5</b> <span class="glyphicon glyphicon-star" aria-hidden="true" style="color:#ffe100"></span>
+                    }
+                    else
+                    {
+                        <span>Brak ocen</span>
+                    }
+                    
+                </div>
+            </div>
+            <div class="col-md-4 service-column">
+                <div class="service-column-inner">
+                    <h3 class="service-column-right-header"><span>Cena za usługę:</span> @Model.Price zł</h3>
+                    <h3 class="service-column-right-header"><span>Lokalizacja:</span> @Model.Region.Name</h3>
+                    @if (User.Identity.IsAuthenticated == true)
+                    {
+                        <h3 class="service-column-right-header">
+                            <span>Zamówienie:</span>
+                            @using (Html.BeginForm("Order", "Services", null, FormMethod.Post, new { style = "display:inline" }))
+                            {
+                                <input type="hidden" name="Id" value="@Model.Id" />
+                                <input type="submit" class="btn btn-success" value="Zamów zakupy" />
+                            }
+                        </h3>
+                    }
+                    else
+                    {
+                        <h3 class="service-column-right-header">
+                            <span>Zamówienie:</span><button type="button" class="btn btn-success" disabled="disabled">Zamów zakupy</button><br />
+                            <span class="service-login-info"><a href="@Url.Action("Login", "Account")">Aby zamówić, musisz się zalogować</a></span>
+                        </h3>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

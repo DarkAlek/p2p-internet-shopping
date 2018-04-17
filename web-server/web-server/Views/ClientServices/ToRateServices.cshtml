@@ -1,0 +1,160 @@
+﻿@using web_server.Helpers;
+
+@model IEnumerable<web_server.Model.ServiceChoosed>
+
+@{
+    ViewBag.Title = "RateView";
+}
+
+<<section id="user-area" class="main-section">
+    <div class="container">
+        <div class="order-finish" style="display:none;">
+            <div class="alert alert-success" role="alert"><b>Gratulujemy </b>Oceniono!</div>
+        </div>
+        <h2>Moje Usługi</h2>
+        <br />
+        <ul class="nav nav-tabs" role="tablist">
+            <li><a href="@Url.Action("Index", "ClientServices")">Aktywne usługi</a></li>
+            <li class="active"><a href="@Url.Action("ToRateServices", "ClientServices")">Usługi do oceny</a></li>
+            <li><a href="@Url.Action("PreviousServices", "ClientServices")">Poprzednie usługi</a></li>
+        </ul>
+        <br />
+        <div class="services-container">
+            @foreach (var item in Model)
+            {
+                <p class="service-container">
+                    <div class="service-left">
+                        <h3 style="float:left">@Html.DisplayFor(modelItem => item.Service.Title)</h3>
+                        <div style="clear:both"></div>
+                        <div class="service-provider">
+                            <b>@Html.DisplayFor(modelItem => item.Provider.FirstName) @Html.DisplayFor(modelItem => item.Provider.SecondName)</b>
+                            @if (ProviderRateHelper.GetCount(item.Provider) > 0)
+                            {
+                                <span class="glyphicon glyphicon-star" aria-hidden="true" style="color:#ffe100"></span>
+                                <span>@ProviderRateHelper.GetRate(item.Provider)/5 (@ProviderRateHelper.GetCount(item.Provider) ocen)</span>
+                            }
+                            else
+                            {
+                                <span>Brak ocen</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="service-right">
+                        <div class="service-price">
+                            @Html.DisplayFor(modelItem => item.Service.Price) zł
+                        </div>
+                        <div class="service-rate" data-service-id="@item.Id">
+                           <button type="button" class="btn btn-success active button_rate_click" data-toggle="modal" data-target="#myModal">Oceń</button>
+                        </div>
+                    </div>
+                </p>
+            }
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content" id="modalwindow">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Ocena</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input class="hidden_stars" type="radio" name="stars" id="star-null" data-mark="0" />
+                            <input class="hidden_stars" type="radio" name="stars" id="star-1" data-mark="1" />
+                            <input class="hidden_stars" type="radio" name="stars" id="star-2" data-mark="2" />
+                            <input class="hidden_stars" type="radio" name="stars" id="star-3" data-mark="3" />
+                            <input class="hidden_stars" type="radio" name="stars" id="star-4" checked data-mark="4" />
+                            <input class="hidden_stars" type="radio" name="stars" id="star-5" data-mark="5" />
+                            <section class="rate">
+                                <p>Oceń usługę:</p>
+                                <label for="star-1">
+                                    <svg width="255" height="140" viewBox="10 0 50 48">
+                                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" />
+                                    </svg>
+                                </label>
+                                <label for="star-2">
+                                    <svg width="255" height="140" viewBox="10 0 50 48">
+                                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" />
+                                    </svg>
+                                </label>
+                                <label for="star-3">
+                                    <svg width="255" height="140" viewBox="10 0 50 48">
+                                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" />
+                                    </svg>
+                                </label>
+                                <label for="star-4">
+                                    <svg width="255" height="140" viewBox="10 0 50 48">
+                                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" />
+                                    </svg>
+                                </label>
+                                <label for="star-5">
+                                    <svg width="255" height="140" viewBox="10 0 50 48">
+                                        <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" />
+                                    </svg>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="button_submit_rate">Oceń</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="..." class="clientservices-paginator">
+            <ul class="pagination">
+                @if (ViewBag.Page > 1)
+                {
+                    <li><a href="@this.Url.Action("ToRateServices", "ClientServices", new { page=ViewBag.Page-1 }, null)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                }
+                @for (var i = Math.Max(ViewBag.Page - 2, 1); i < ViewBag.Page; ++i)
+                {
+                    <li><a href="@this.Url.Action("ToRateServices", "ClientServices", new { page=i }, null)">@i</a></li>
+                }
+                <li class="active"><a href="#">@ViewBag.Page<span class="sr-only">(current)</span></a></li>
+                @for (var i = ViewBag.Page + 1; i <= ViewBag.NumOfPages && i - ViewBag.Page < 3; ++i)
+                {
+                    <li><a href="@this.Url.Action("ToRateServices", "ClientServices", new { page=i }, null)">@i</a></li>
+                }
+                @if (ViewBag.Page < ViewBag.NumOfPages)
+                {
+                    <li><a href="@this.Url.Action("ToRateServices", "ClientServices", new { page=ViewBag.Page+1 }, null)" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        var last_clicked_id;
+
+        $(".button_rate_click").on("click", function (e) {
+            last_clicked_id = $(this).closest(".service-rate").attr('data-service-id');
+        });
+
+        $("#button_submit_rate").on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var mark = $("input:checked").attr('data-mark');
+            var url = "/ClientServices/RateService";
+
+            data = {
+                'mark': mark,
+                'serviceID': last_clicked_id
+            };
+
+            console.log(data);
+
+            $.post(url, data, function () { 
+                $(".order-finish").fadeIn();   // handle success
+                $('#myModal').modal('hide');
+                setTimeout(function () { window.location.reload(false); }, 1000)  
+            }).fail(function () {
+                // handle error here
+            });
+        });
+
+    });
+</script>
+

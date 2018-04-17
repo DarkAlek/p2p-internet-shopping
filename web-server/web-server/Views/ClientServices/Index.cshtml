@@ -1,0 +1,81 @@
+﻿@using web_server.Helpers; 
+
+@model IEnumerable<web_server.Model.ServiceChoosed>
+
+@{
+    ViewBag.Title = "ClientView";
+}
+
+<section id="user-area" class="main-section">
+    <div class="container">
+        <h2>Moje Usługi</h2>
+        <br />
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="@Url.Action("Index", "ClientServices")">Aktywne usługi</a></li>
+            <li><a href="@Url.Action("ToRateServices", "ClientServices")">Usługi do oceny</a></li>
+            <li><a href="@Url.Action("PreviousServices", "ClientServices")">Poprzednie usługi</a></li>
+        </ul>
+        <br />
+
+        <div class="services-container">
+            @foreach (var item in Model)
+            {
+                <p class="service-container">
+                    <div class="service-left">
+                        <h3 style="float:left">@Html.DisplayFor(modelItem => item.Service.Title)</h3>
+                        <div style="clear:both"></div>
+                        <div class="service-provider">
+                            <b>@Html.DisplayFor(modelItem => item.Provider.FirstName) @Html.DisplayFor(modelItem => item.Provider.SecondName)</b>
+                            @if (ProviderRateHelper.GetCount(item.Provider) > 0)
+                            {
+                                <span class="glyphicon glyphicon-star" aria-hidden="true" style="color:#ffe100"></span>
+                                <span>@ProviderRateHelper.GetRate(item.Provider)/5 (@ProviderRateHelper.GetCount(item.Provider) ocen)</span>
+                            }
+                            else
+                            {
+                                <span>Brak ocen</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="service-right">
+                        <div class="service-price">
+                            @Html.DisplayFor(modelItem => item.Service.Price) zł
+                        </div>
+                        <div class="service-rate" data-service-id="@item.Id">
+                            @if (item.Accepted != true)
+                            {
+                                <button type="button" class="btn btn-success disabled" data-toggle="modal" data-target="#myModal">Oczekiwanie na akcpetację</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-success disabled">Oczekiwanie na potwierdzenie realizacji</button>
+                            }
+                        </div>
+                    </div>
+                </p>
+            }
+        </div>
+
+        <nav aria-label="..." class="clientservices-paginator">
+            <ul class="pagination">
+                @if (ViewBag.Page > 1)
+                {
+                    <li><a href="@this.Url.Action("Index", "ClientServices", new { page=ViewBag.Page-1 }, null)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                }
+                @for (var i = Math.Max(ViewBag.Page - 2, 1); i < ViewBag.Page; ++i)
+                {
+                    <li><a href="@this.Url.Action("Index", "ClientServices", new { page=i }, null)">@i</a></li>
+                }
+                <li class="active"><a href="#">@ViewBag.Page<span class="sr-only">(current)</span></a></li>
+                @for (var i = ViewBag.Page + 1; i <= ViewBag.NumOfPages && i - ViewBag.Page < 3; ++i)
+                {
+                    <li><a href="@this.Url.Action("Index", "ClientServices", new { page=i }, null)">@i</a></li>
+                }
+                @if (ViewBag.Page < ViewBag.NumOfPages)
+                {
+                    <li><a href="@this.Url.Action("Index", "ClientServices", new { page=ViewBag.Page+1 }, null)" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</section>

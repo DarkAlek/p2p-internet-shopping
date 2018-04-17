@@ -1,0 +1,102 @@
+﻿<Controls:MetroWindow x:Class="client_desktop.AddUserWindow"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:client_desktop"
+        mc:Ignorable="d"
+        x:Name="AddWindow" Title="AddUserWindow" Height="293.311" Width="481.127" IsWindowDraggable="False" IsCloseButtonEnabled="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" >
+    <Grid>
+        <StackPanel DataContext="{Binding SelectedUser}">
+            <Label Content="_UserName:" Target="{Binding ElementName=UserName}" />
+            <TextBox x:Name="txt1" Controls:TextBoxHelper.Watermark="UserName" Margin="10 0 10 0" Controls:TextBoxHelper.ClearTextButton="True" MaxLength="35" Validation.Error="Validation_Error" Text="{Binding UpdateSourceTrigger=LostFocus, Path=UserName, 
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" >
+            </TextBox>
+            <Label Content="_Password:" Target="{Binding ElementName=Password}" />
+            <TextBox x:Name="txt4" Controls:TextBoxHelper.Watermark="Password" Margin="10 0 10 0" Controls:TextBoxHelper.ClearTextButton="True" MaxLength="35" Validation.Error="Validation_Error" Text="{Binding UpdateSourceTrigger=LostFocus, Path=Password, 
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" >
+            </TextBox>
+            <Label Content="_Email:" Target="{Binding ElementName=Email}" />
+            <TextBox  x:Name="txt2" Controls:TextBoxHelper.Watermark="Email" Margin="10 0 10 0" Controls:TextBoxHelper.ClearTextButton="True" MaxLength="35" Validation.Error="Validation_Error" Text="{Binding UpdateSourceTrigger=LostFocus, Path=Email, 
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" >
+            </TextBox>
+            <Label Content="_PhoneNumber:" Target="{Binding ElementName=PhoneNumber}" />
+            <TextBox  x:Name="txt3" Controls:TextBoxHelper.Watermark="PhoneNumber" Margin="10 0 10 0" Controls:TextBoxHelper.ClearTextButton="True" MaxLength="15" Validation.Error="Validation_Error" Text="{Binding UpdateSourceTrigger=LostFocus, Path=PhoneNumber, 
+                        ValidatesOnDataErrors=true, NotifyOnValidationError=true}" >
+            </TextBox>
+            <DockPanel  Margin="5 30 5 0" >
+                <Button Command="{Binding ElementName=AddWindow, Path=DataContext.AddCustomerCmd}" Content="Add Customer" Width="100" Click="Button_Click" >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt1}" Value="False"/>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt2}" Value="False"/>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt3}" Value="False"/>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt4}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Command="{Binding ElementName=AddWindow, Path=DataContext.AddProviderCmd}" Content="Add Provider" Width="100" Click="Button_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt1}" Value="False"/>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt2}" Value="False"/>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt3}" Value="False"/>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt4}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Command="{Binding ElementName=AddWindow, Path=DataContext.AddAdminCmd}" Content="Add Admin" Width="100" Click="Button_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt1}" Value="False"/>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt2}" Value="False"/>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt3}" Value="False"/>
+                                        <Condition Binding="{Binding (Validation.HasError), ElementName=txt4}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="cancel_button" Content="Cancel" HorizontalAlignment="Right" Width="100" IsEnabled="True" Click="cancel_button_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>

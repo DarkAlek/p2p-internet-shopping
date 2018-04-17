@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<!--
+   ==================================================
+   Slider Section Start
+   ================================================== -->
+<section id="hero-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="block wow fadeInUp" data-wow-delay=".3s">
+
+                    <!-- Slider -->
+                    <section class="cd-intro">
+                        <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s">
+                            <span>Wygodne zakupy?</span><br>
+                            <span>Wystarczy, że wybierzesz region i usługodawcę</span>
+                        </h1>
+                    </section> <!-- cd-intro -->
+                    <!-- /.slider -->
+                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s">
+                        Nie musisz wychodzić z domu.<br />
+                        Wybierz usługodawcę, który przyniesie zakupy do Ciebie.
+                    </h2>
+                    <!--
+                                    <a class="btn-lines dark light wow fadeInUp animated smooth-scroll btn btn-default btn-green" data-wow-delay=".9s" href="#works" data-section="#works" >View Works</a>
+                                    -->
+
+                    @using (Html.BeginForm("Index", "Services", FormMethod.Get))
+                    {
+                        <div class="form-group wow fadeInDown" data-wow-duration="500ms" data-wow-delay=".6s" style="margin:0 auto;max-width:300px">
+                            @Html.TextBox("region", null, new { placeholder="Region np. Warszawa", @class="form-control", name="region"})
+                        </div>
+                        <div id="submit" class="wow fadeInDown" data-wow-duration="500ms" data-wow-delay="1.4s">
+                            <input class="btn btn-default btn-send" id="contact-submit" type="submit" value="Szukaj" />
+                        </div>
+                    }
+                    <!--
+                            <form style="text-align:center" action="">
+                                <input placeholder="Region np. Warszawa" class="form-control" name="service" id="service" type="text">
+                                <input id="contact-submit" class value="Szukaj" type="submit">
+                        </div>
+                    </form>
+                -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/#main-slider-->
+<!--
+
+==================================================
+Portfolio Section Start
+================================================== -->
+<section id="feature">
+    <div class="container">
+        <div class="section-heading">
+            <h1 class="title wow fadeInDown" data-wow-delay=".3s">Dlaczego warto skorzystać</h1>
+            <p class="wow fadeInDown" data-wow-delay=".5s">
+                Strona umożliwia szybkie i bezbolesne zrobienie zakupów za Ciebie ;)
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-flask-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Faza testów</h4>
+                        <p>Korzystanie ze strony w aktualnej fazie jest bezpłatne!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="600ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-lightbulb-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Innowacyjność</h4>
+                        <p>Żadna inna strona nie oferuje takich usług!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="900ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-lightbulb-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Rozwój</h4>
+                        <p>Z każdym tygodniem rozbudowujemy stronę o dodatkowe możliwości</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="1200ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-americanfootball-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Aktualizacje</h4>
+                        <p>System cały czas się rozwija, dodawane są kolejne możliwości</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="1500ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-keypad-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Wsparcie techniczne</h4>
+                        <p>Masz problem z działaniem strony? Napisz do nas, naprawimy to!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xs-12">
+                <div class="media wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="1800ms">
+                    <div class="media-left">
+                        <div class="icon">
+                            <i class="ion-ios-barcode-outline"></i>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Przyjemne korzystanie</h4>
+                        <p>Korzystanie ze strony jest naprawdę proste i zupełnie bezpieczne</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> <!-- /#feature -->
+<!--
+==================================================
+Call To Action Section Start
+================================================== -->
+<section id="call-to-action">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <h2 class="title wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
+                        Co o tym sądzisz?</h1>
+                        <p class="wow fadeInDown" data-wow-delay=".5s" data-wow-duration="500ms">Projekt strony powstał na potrzeby przedmiotu .NET<br>Jeśli masz pomysł na rozwinięcie projektu napisz do nas!</p>
+                        <a href="mailto:pranczkk@student.mini.pw.edu.pl" class="btn btn-default btn-contact wow fadeInDown" data-wow-delay=".7s" data-wow-duration="500ms">Napisz do nas</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

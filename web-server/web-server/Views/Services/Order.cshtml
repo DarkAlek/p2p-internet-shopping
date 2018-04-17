@@ -1,0 +1,122 @@
+﻿@using web_server.Helpers;
+
+@model web_server.Model.Service
+
+@{
+    ViewBag.Title = "Order";
+}
+
+<section id="service-area" class="main-section">
+    <div class="container">
+        <div class="row">
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li onclick="window.history.back();" class="previous"><a href="#"><span aria-hidden="true">←</span> Powrót do usługi</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-8 service-column">
+                <div class="service-column-inner">
+                    <div class="order-start">
+                        <h3>Zamówienie</h3>
+                        <br />
+
+                        Opisz swoje zamówienie, wcześniej upewnij się, że usługodawca może zrobić dla Ciebie zrobić takie zakupy.<br /><br />
+                        @using (Html.BeginForm("OrderSummary", "Services", null, FormMethod.Post, new { style = "display:inline" }))
+                        {
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                            @Html.TextArea("note", null, new { placeholder = "Notatka dla usługodawcy", @class = "form-control", name = "note", required = "required" })
+                            <div class="alert alert-warning" role="alert" style="display:none;padding:5px 0 5px 15px;margin-top:5px;">Proszę uzupełnić notatkę zamówienia</div>
+                            <p style="color:#AAA; font-size:12px; margin-top:5px;">*Po zaakceptowaniu zamówienia przez usługodawcę dostaniesz nr telefonu.</p>
+
+                            <br />
+                            <input type="submit" class="btn btn-success pull-right" value="Podsumowanie" id="form-order-button" />
+                        }
+
+                        <div style="clear:both"></div>
+                    </div>
+                    <div class="order-summary" style="display:none;">
+                        <h3>Podsumowanie</h3>
+                        <br/>
+                        Usługodawca: <b id="data-provider"></b><br/>
+                        Lokalizacja: <b id="data-localization"></b><br />
+                        Cena: <b id="data-price"></b><br />
+                        Notatka:
+                        <p id="data-note"></p>
+
+                        @using (Html.BeginForm("OrderFinish", "Services", null, FormMethod.Post, new { style = "display:inline" }))
+                        {
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                            <input type="hidden" name="Note" value="" />
+
+                            <br />
+                            <input type="submit" class="btn btn-success pull-right" value="Zamów" id="form-accept-button" />
+                        }
+
+                        <div style="clear:both"></div>
+                    </div>
+                    <div class="order-finish" style="display:none;">
+                        <div class="alert alert-success" role="alert"><b>Gratulujemy</b>, Twoje zamówienie zostało przyjęte ;)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 service-column">
+                <div class="service-column-inner">
+                    <h3 class="service-column-right-header"><span>Cena za usługę:</span> @Model.Price zł</h3>
+                    <h3 class="service-column-right-header"><span>Lokalizacja:</span> @Model.Region.Name</h3>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready()
+            {
+                $("#form-order-button").on("click", function(e)
+                {
+                    e.preventDefault();
+
+                    if($("textarea").val().length > 0)
+                    {
+                        $.post("/Services/OrderSummary", { Id: @Model.Id, note: $("textarea").val() }, function(data) {
+                            $("#data-provider").text(data["ProviderFirstName"] + " " + data["ProviderSecondName"]);
+                            $("#data-localization").text(data["Location"]);
+                            $("#data-price").text(data["Price"] + " zł")
+                            $("#data-note").text(data["Note"]);
+
+                            $(".order-start").fadeOut(300, function()
+                            {
+                                $(".order-summary").fadeIn();
+                            });
+
+                        });
+                    }
+                    else
+                    {
+                        $(".alert-warning").fadeIn();
+                    }
+                });
+
+                $("#form-accept-button").on("click", function(e)
+                {
+                    e.preventDefault();
+
+                    if($("textarea").val().length > 0)
+                    {
+                        $.post("/Services/OrderFinish", { Id: @Model.Id, note: $("textarea").val() }, function(data) {
+                            $(".order-summary").fadeOut(300, function()
+                            {
+                                $(".order-finish").fadeIn();
+                            });
+                        });
+                    }
+                    else
+                    {
+                        $(".alert-warning").fadeIn();
+                    }
+                });
+            }
+
+        </script>
+    </div>
+</section>
